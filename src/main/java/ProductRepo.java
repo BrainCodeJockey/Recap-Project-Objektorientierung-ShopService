@@ -29,9 +29,9 @@ public class ProductRepo {
         return Optional.empty();
     }
 
-    public Product addProduct(Product newProduct) {
+    public Optional<Product> addProduct(Product newProduct) {
         products.add(newProduct);
-        return newProduct;
+        return Optional;
     }
 
     public void removeProduct(String id) {
