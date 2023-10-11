@@ -18,7 +18,7 @@ public class Main {
         Order initialOrder = service.addOrder(List.of("1"));
         System.out.println(initialOrder);
 
-        Order updatedOrder = service.updateOrder(initialOrder.id(), List.of("1"), OrderStatus.COMPLETED);
+        Order updatedOrder = service.updateOrder(initialOrder.id(), OrderStatus.COMPLETED);
         System.out.println(updatedOrder);
     }
 }

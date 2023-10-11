@@ -38,14 +38,9 @@ public class ShopService {
     }
 
     // Methode, um eine Bestellung basierend auf der 'orderId' und dem neuen Status zu aktualisieren
-    public Order updateOrder(String orderId, List<String> productIds, OrderStatus newStatus) {
+    public Order updateOrder(String orderId, OrderStatus newStatus) {
         Order orderToUpdate = Optional.ofNullable(orderRepo.getOrderById(orderId))
                 .orElseThrow(() -> new RuntimeException("Bestellung mit der ID: " + orderId + " nicht gefunden!"));
-
-        List<Product> products = productIds.stream()
-                .map(productId -> productRepo.getProductById(productId)
-                .orElseThrow(() -> new RuntimeException("Bestellung mit der ID: " + orderId + " nicht gefunden!")))
-                .toList();
 
         Order updatedOrder = orderToUpdate.withStatus(newStatus);
         orderRepo.removeOrder(orderId);
