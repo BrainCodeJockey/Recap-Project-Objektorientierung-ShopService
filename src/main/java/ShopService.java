@@ -26,7 +26,7 @@ public class ShopService {
                 System.out.println("Product mit der Id: " + productId + " konnte nicht bestellt werden!");
                 return null;
             }
-            products.add(productToOrder);
+            products.add(productToOrder.get());
         }
 
         Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);

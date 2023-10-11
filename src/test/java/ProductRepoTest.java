@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import javax.swing.text.html.Option;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,7 +25,7 @@ class ProductRepoTest {
         ProductRepo repo = new ProductRepo();
 
         //WHEN
-        Product actual = repo.getProductById("1");
+        Optional<Product> actual = repo.getProductById("1");
 
         //THEN
         Product expected = new Product("1", "Apfel");
@@ -41,7 +39,7 @@ class ProductRepoTest {
         Product newProduct = new Product("2", "Banane");
 
         //WHEN
-        Product actual = repo.addProduct(newProduct);
+        Optional<Product> actual = repo.addProduct(newProduct);
 
         //THEN
         Product expected = new Product("2", "Banane");

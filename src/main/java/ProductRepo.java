@@ -31,7 +31,7 @@ public class ProductRepo {
 
     public Optional<Product> addProduct(Product newProduct) {
         products.add(newProduct);
-        return Optional;
+        return Optional.empty();
     }
 
     public void removeProduct(String id) {
