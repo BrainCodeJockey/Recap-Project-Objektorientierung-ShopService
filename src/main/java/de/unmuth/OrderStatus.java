@@ -1,3 +1,5 @@
+package de.unmuth;
+
 public enum OrderStatus {
     PROCESSING("progressing"),
     IN_DELIVERY("in delivery"),
