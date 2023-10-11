@@ -1,3 +1,5 @@
+package de.unmuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
