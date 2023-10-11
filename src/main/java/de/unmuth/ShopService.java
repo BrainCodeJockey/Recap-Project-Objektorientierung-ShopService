@@ -6,8 +6,6 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-
-
 public class ShopService {
     private ProductRepo productRepo = new ProductRepo();
     private OrderRepo orderRepo = new OrderMapRepo();
@@ -21,10 +19,9 @@ public class ShopService {
         return byStatus;
     }
 
-
     // Bearbeitet die Methode 'addOrder' im ShopService,
     // sodass eine Exception geworfen wird, wenn das Product nicht vorhanden ist.
-    public Order addOrder(List<String> productIds) throws RuntimeException   {
+    public Order addOrder(List<String> productIds) throws RuntimeException {
         List<Product> products = new ArrayList<>();
 
         for (String productId : productIds) {
@@ -37,9 +34,28 @@ public class ShopService {
         }
 
         Order newOrder = new Order(UUID.randomUUID().toString(), products, OrderStatus.PROCESSING);
-
         return orderRepo.addOrder(newOrder);
     }
+
+    // Methode, um eine Bestellung basierend auf der 'orderId' und dem neuen Status zu aktualisieren
+    public Order updateOrder(String orderId, List<String> productIds, OrderStatus newStatus) {
+        Order orderToUpdate = Optional.ofNullable(orderRepo.getOrderById(orderId))
+                .orElseThrow(() -> new RuntimeException("Bestellung mit der ID: " + orderId + " nicht gefunden!"));
+
+        List<Product> products = productIds.stream()
+                .map(productId -> productRepo.getProductById(productId)
+                .orElseThrow(() -> new RuntimeException("Bestellung mit der ID: " + orderId + " nicht gefunden!")))
+                .toList();
+
+        Order updatedOrder = orderToUpdate.withStatus(newStatus);
+        orderRepo.removeOrder(orderId);
+        orderRepo.addOrder(updatedOrder);
+
+        return updatedOrder;
+    }
+
+
+
 
     public ProductRepo getProductRepo() {
         return productRepo;
