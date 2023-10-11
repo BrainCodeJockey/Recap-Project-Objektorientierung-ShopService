@@ -7,14 +7,18 @@ public class Main {
         ShopService service = new ShopService();
         ProductRepo productRepoService = service.getProductRepo();
 
-        service.getProductRepo().addProduct(new Product("p1","iPhone"));
-        service.getProductRepo().addProduct(new Product("p2","Galaxy Phone"));
-        service.getProductRepo().addProduct(new Product("p3","iPad"));
-        service.getProductRepo().addProduct(new Product("p4","Mac Book"));
-        service.getProductRepo().addProduct(new Product("p5","Xiaomi Phone"));
+        service.getProductRepo().addProduct(new Product("2","iPhone"));
+        service.getProductRepo().addProduct(new Product("3","Galaxy"));
+        service.getProductRepo().addProduct(new Product("4","iPad"));
+        service.getProductRepo().addProduct(new Product("5","MacBook"));
+        service.getProductRepo().addProduct(new Product("6","Xiaomi"));
 
-        service.addOrder(List.of("100"));
+        //service.addOrder(List.of("100"));
+
+        Order initialOrder = service.addOrder(List.of("1"));
+        System.out.println(initialOrder);
+
+        Order updatedOrder = service.updateOrder(initialOrder.id(), List.of("1"), OrderStatus.COMPLETED);
+        System.out.println(updatedOrder);
     }
 }
-
-
